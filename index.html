@@ -1,50 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>☠️TEMPLEDOMIC Toolkit ☠️</title>
-<style>
-  body { font-family: 'Courier New', monospace; background: #0f0f0f; color: #00ff99; margin:0; padding:0;}
-  .password-page, .main-page { display:none; justify-content:center; align-items:center; height:100vh; flex-direction:column; text-align:center;}
-  .password-page.active, .main-page.active { display:flex; }
-  input[type="password"] { padding:12px; font-size:16px; margin-bottom:10px; border-radius:5px; border:none; background:#1a1a1a; color:#00ff99;}
-  button { padding:10px 20px; background:#00ff99; border:none; border-radius:5px; color:#0f0f0f; cursor:pointer; font-weight:bold; margin:5px;}
-  button:hover { background:#00cc77;}
-  h1,h2 { margin-bottom:20px; }
-  .box { background:#1a1a1a; border:1px solid #00ff99; margin:10px; padding:15px; width:90%; max-width:600px; border-radius:8px; cursor:pointer; transition:.3s;}
-  .box:hover { background:#111;}
-  .box h3 { margin:0; }
-  .links { margin-top:10px; display:none; flex-direction:column;}
-  .links a { color:#00ff99; text-decoration:none; margin:5px 0;}
-  .links a:hover { text-decoration:underline;}
-</style>
-</head>
-<body>
-
-<!-- PASSWORD PAGE -->
-<div class="password-page active" id="passwordPage">
-  <h2>Enter Password to Unlock 🔒</h2>
-  <input type="password" id="passwordInput" placeholder="Password">
-  <button onclick="checkPassword()">Unlock</button>
-  <p id="error" style="color:red;"></p>
-</div>
-
-<!-- MAIN PAGE -->
-<div class="main-page" id="mainPage">
-  <h1>Dominion Toolkit 🌚</h1>
-  <p>Before using, please join my WhatsApp group/channel:</p>
-  <button id="whatsappButton">Join WhatsApp</button>
-</div>
-
 <script>
-  // 🔑 CONFIGURATION: Edit your links here
-  const PASSWORD = "DOMINION MD";
-  const WHATSAPP_LINK = "https://chat.whatsapp.com/KXmfveO8ngyHxiIQ5j7pEJ?mode=gi_t"; // <-- Replace with your WhatsApp link
+  const PASSWORD = "DOMINION MD"; // Your password
+  const WHATSAPP_LINK = "https://chat.whatsapp.com/YOUR_INVITE_LINK_HERE";
 
   const sections = [
     {title: "💻 Programming Tools", links:["https://replit.com","https://codepen.io"]},
-    {title: "🎵 Premium Music Links", links:["bvb","https://soundcloud.com"]},
+    {title: "🎵 Music Links", links:["https://spotify.com","https://soundcloud.com"]},
     {title: "📚 Learning Links", links:["https://khanacademy.org","https://coursera.org"]},
     {title: "📰 News", links:["https://bbc.com","https://cnn.com"]},
     {title: "🎮 Gaming", links:["https://steam.com","https://epicgames.com"]},
@@ -53,8 +13,8 @@
     {title: "📷 Photography", links:["https://unsplash.com","https://pexels.com"]},
     {title: "🖥️ Tech News", links:["https://techcrunch.com","https://thenextweb.com"]},
     {title: "🎨 Design Tools", links:["https://canva.com","https://figma.com"]},
-    {title: "🔧 Utilities", links:[https://t.me/freeallvipapps/214]},
-    {title: "📺 Streaming", links:[https://moviebox.ph/]},
+    {title: "🔧 Utilities", links:[]},
+    {title: "📺 Streaming", links:[]},
     {title: "📊 Analytics", links:[]},
     {title: "🗂️ Files & Docs", links:[]},
     {title: "💬 Communication", links:[]},
@@ -70,23 +30,28 @@
   const errorText = document.getElementById('error');
   const whatsappButton = document.getElementById('whatsappButton');
 
-  // WhatsApp button click
+  // WhatsApp button
   whatsappButton.onclick = () => { window.open(WHATSAPP_LINK,'_blank'); };
 
-  // Password check
   function checkPassword() {
-    const input = document.getElementById('passwordInput').value;
+    const input = document.getElementById('passwordInput').value.trim(); // <- trim spaces
     if(input === PASSWORD) {
       passwordPage.classList.remove('active');
       mainPage.classList.add('active');
-      loadSections();
+      loadSections(); // <- make sure sections load after unlocking
     } else {
       errorText.textContent = "Wrong password 😭";
     }
   }
 
-  // Create boxes and links dynamically
   function loadSections() {
+    mainPage.innerHTML = `
+      <h1>Dominion Toolkit 🌚</h1>
+      <p>Before using, please join my WhatsApp group/channel:</p>
+      <button id="whatsappButton">Join WhatsApp</button>
+    `;
+    document.getElementById('whatsappButton').onclick = () => { window.open(WHATSAPP_LINK,'_blank'); };
+
     sections.forEach(sec => {
       const box = document.createElement('div');
       box.className = 'box';
@@ -116,6 +81,3 @@
     links.style.display = (links.style.display === 'flex') ? 'none' : 'flex';
   }
 </script>
-
-</body>
-</html>
